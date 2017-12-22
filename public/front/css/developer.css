@@ -1,0 +1,19 @@
+.activate_img {
+    text-align: center;
+}
+.video_screen{
+	width: 500px !important;
+    height: 250px !important;
+    margin: auto;
+	background-color: #000;
+}
+.vjs-default-skin .vjs-big-play-button {
+    top: 10em !important;
+    left: 24em !important;
+    width: 5em !important;
+    height: 5em !important;
+}
+.vjs-default-skin .vjs-big-play-button:before {
+    font-size: 1.9em !important;
+    line-height: 2.3em !important;
+}

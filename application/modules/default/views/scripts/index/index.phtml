@@ -1,0 +1,171 @@
+<?php $this->headScript()->appendFile($this->ADMIN_PATH . "js/front.js"); ?>
+<div id="front-listing"></div>
+<div class="banner-div">
+    <div class="hero-div clearfix"></div><!-- end of hero div -->
+        <div class="caption">
+            <h2>Discover The City For Good / Bad </h2>
+            <h3>Listify helps you find out whats happening in your city, Let's explore.</h3> 
+			<p><a href="#">Explore</a></p>                    
+        </div>
+    </div><!-- end of banner div -->
+    
+     <div class="container-area">
+     	
+        <div class="container" id="howitworks">
+			<div class="row">      
+				<div class="howitwork-container clearfix">
+					<h2>See How It Works</h2>
+					<h3>Discover how Good or Bad can you find eveywhere.</h3>
+					
+					<div class="howitwork-ul clearfix">
+						<ul class="row">
+							<li class="col-md-4 col-sm-4">
+								<div class="howitwork-box clearfix">
+									<span><img src="images/howitworks-1.png" alt=""></span>
+									<h3>Choose What You<br>Want To See </h3>
+								</div><!-- end of howitwork-box -->
+							</li>
+							<li class="col-md-4 col-sm-4">
+								<div class="howitwork-box clearfix">
+									<span><img src="images/howitworks-2.png" alt=""></span>
+									<h3>Find What<br>You See!</h3>
+								</div><!-- end of howitwork-box -->
+							</li>
+							<li class="col-md-4 col-sm-4">
+								<div class="howitwork-box clearfix">
+									<span><img src="images/howitworks-3.png" alt=""></span>
+									<h3>Explore and<br>Share With Us!</h3>
+								</div><!-- end of howitwork-box -->
+							</li>
+						</ul>
+					</div><!-- end of howitwork-ul -->                
+					
+				</div><!-- end of howitwork-container -->
+            </div><!-- end of row -->        
+        </div><!-- end of container -->
+        
+        
+        <div class="things-do-container clearfix">
+            <h2>Things to Do in the City </h2>
+            <h3>Explore some of GOOD/BAD things from around the your area. </h3>
+            <div class="container">
+				<div class="row">
+					<div class="things-do-div clearfix">
+						<div class="grid">
+						  <div class="grid-sizer"></div>
+						   <?php if (count($this->PostArray) > 0): ?>
+						   <?php foreach($this->PostArray as $value) {									
+						   ?>
+							  <div class="grid-item">
+								<div class="things-do-box clearfix">
+									
+										<div class="top-div">
+										<?php if($value['usr_image'] != ""){
+											$usr_image = $value['usr_image'];
+										}else{
+											$usr_image = $this->BASE_URL.'public/admin/img/user-thumb.jpg';
+										}?>
+											<div class="user-thumb"><img src="<?php echo $usr_image;?>" alt="" class="img-responsive"></div>
+											<div class="top-txt">
+												<div class="user-txt"><?php echo $value['usr_name']; ?></div>
+												<?php $gtlCommon = new GTL_Common();
+													$dateofpost =  $gtlCommon->time_elapsed_string($value['post_createddate'])	 ?>
+												<div class="time-txt"><?php echo $dateofpost;?> <span>.</span><?php echo $value['cat_name']; ?></div>
+												<div class="location-txt"><?php echo $value['post_location']; ?></div>
+											</div>
+										</div>
+										<?php if($value['post_type'] == "Good"){
+											$cls = "good-badage";
+										}else{
+											$cls = "bad-badage";											
+										}?>
+										
+										<div class="thumb"><span class="<?php echo $cls;?>"><?php echo $value['post_type']; ?></span><a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>" rel="popupoutbox" class="popup"><img src="<?php echo $value['post_image']; ?>" alt="" class="thumb-img img-responsive"></a></div>
+										<div class="txt-div">
+											<a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>"><h4><?php echo $value['post_title']; ?></h4></a>
+										 </div>
+										 <div class="btm-strip">
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="good-icon like_comt"></i> <?php echo $value['post_good']; ?></a></span>
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="bad-icon like_comt"></i> <?php echo $value['post_bad']; ?></a></span>
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="comments-icon like_comt"></i><?php echo $value['post_comment']; ?></a></span>
+											<span><a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>"><i class="share-icon"></i> (10)</a></span>
+										 </div>
+									
+									</div><!-- end of box -->
+							  </div>
+						  <?php   } endif; ?>	
+                 
+						</div><!-- end of grid -->
+						<div class="exlpore-more-div"><a href="#" class="exlpore-more">Explore</a></div>
+					</div><!-- end of things-do-div -->
+                </div><!-- end of row -->        
+        	</div><!-- end of container -->
+     
+		</div><!-- end of things-do-container -->
+     
+     
+		<div id="download" class="download-div">
+
+		<!--container-->
+				<div class="container">
+					<div class="row">
+			
+						<!-- Start title-section -->
+								<div class="download-content">
+									<h2>Get it for free</h2>
+									<div class="btn-download-content">
+										<a href="#" class="btn-downlaod"><img src="<?php echo $this->BASE_URL .'public/img/play-app.png';?>" alt="" title=""> </a>
+									</div>
+			
+			
+									<img src="<?php echo $this->BASE_URL .'public/img/device3.png';?>" alt="" title="" class="img-responsive">
+								</div>
+					</div>
+				</div>
+		</div><!-- end of download div -->
+     
+     
+	</div><!-- end of container - area -->
+	
+	
+	
+	<!-- Modal -->
+<div class="modal fade" id="appmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        
+      </div>
+      <div class="modal-body">
+        
+        <div class="app-modal-div clearfix">
+        	
+            <div class="download-content">
+            <h2>Get it for free</h2>
+            
+            <h3>Download App for any comments, like and dslike</h3>
+            <h4></h4>
+            <div class="btn-download-content">
+                <a href="#"><img src="<?php echo $this->BASE_URL .'public/img/play-app.png';?>" width="200px" class="img-responsive" alt="" title=""> </a>
+            </div>
+
+			
+            <img src="<?php echo $this->BASE_URL .'public/img/device3.png';?>" alt="" title="" class="img-responsive">
+        </div>
+        
+        </div><!-- end of app-modal-div  -->
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal end -->
+
+<script>
+ $(".like_comt").click(function() {			
+	$("#appmodal").("show");
+});
+</script>
+   

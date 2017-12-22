@@ -1,0 +1,69 @@
+<?php $this->headScript()->appendFile($this->ADMIN_PATH . "js/login.js"); ?>
+<div id="login-listing"></div>
+<style>
+    .gerror_message {border:1px solid red !important;}
+    .fail_error {
+        color: red;
+        font-weight: bold;
+        padding: 10px;
+    }
+</style>
+
+<?php echo $this->flashmessages(); ?>
+<form class="form-signin" action="" method="post">
+    <h2 class="form-signin-heading">sign in now</h2>
+    <?php if (count($this->errorMessage) > 0): ?>
+        <br/>
+        <div class="col-lg-12">                  
+            <div class="alert alert-block alert-danger fade in">
+                <button type="button" class="close close-sm" data-dismiss="alert">
+                    <i class="fa fa-times"></i>
+                </button>
+                <?php foreach ($this->errorMessage as $erroValue): ?>
+                    <?php foreach ($erroValue as $_value): ?>
+                        <?php echo $_value; ?>
+                    <?php endforeach; ?>
+                    <br/>
+                <?php endforeach; ?>
+            </div>
+        </div>
+    <?php endif; ?>
+
+    <div class="login-wrap">
+        <?php echo $this->form->email; ?>
+        <?php echo $this->form->password; ?>
+        <label class="checkbox">
+                <!--<input type="checkbox" value="remember-me"> Remember me-->
+            <span class="pull-right">
+                <a data-toggle="modal" href="#myModal"> Forgot Password?</a>
+            </span>
+        </label>
+        <button class="btn btn-lg btn-login btn-block" type="submit">Sign in</button>
+
+
+    </div>
+</form>
+<!-- Modal -->
+<div aria-hidden="true" aria-labelledby="myModalLabel" role="dialog" tabindex="-1" id="myModal" class="modal fade">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title">Forgot Password ?</h4>
+            </div>
+            <form action="" method="post">
+                <div class="modal-body">
+                    <p>Enter your e-mail address below to reset your password.</p>
+                    <div class="fail_error">Email address is not registered.</div>
+                    <?php echo $this->frgtForm->admin_email; ?>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-default" type="button">Cancel</button>
+                    <button class="btn btn-success" id="submit" type="button">Submit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- modal -->
+

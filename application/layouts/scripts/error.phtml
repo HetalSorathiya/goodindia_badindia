@@ -1,0 +1,54 @@
+<?php
+echo '<?xml version="1.0" encoding="UTF-8" ?>';
+echo $this->doctype();
+
+?>
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="shortcut icon" href="<?php echo $this->config->IMAGE_PATH;?>favicon.png">
+    <meta name="author" content="<?php echo $this->config->SITE_NAME;?>"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <script>
+    var BASE_PATH = '<?php echo BASE_PATH;?>';
+    </script>
+    <?php
+     echo $this->headTitle();
+     echo $this->headLink();
+    ?>
+
+
+    
+    <link rel="shortcut icon" href="<?php echo $this->config->IMAGE_PATH;?>favicon.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta charset="utf-8">
+    <script src="<?php echo $this->config->PUBLIC_PATH;?>lib/jquery/jquery-2.0.3.min.js"> </script>
+    <script src="<?php echo $this->config->PUBLIC_PATH;?>lib/parsley/parsley.js"> </script>
+    <script src="<?php echo $this->config->PUBLIC_PATH;?>lib/backbone/underscore-min.js"></script>
+    <script src="<?php echo $this->config->PUBLIC_PATH;?>js/settings.js"> </script>
+</head>
+<body>
+<div class="single-widget-container error-page">
+    <section class="widget transparent widget-404">
+        <div class="body">
+            <div class="row">
+                <div class="col-md-5">
+                    <h1 class="text-align-center">404</h1>
+                </div>
+                <div class="col-md-7">
+                    <div class="description">
+                        <h3>Opps, it seems that this page does not exist here.</h3>
+                        <p>If you are sure it should, search for it.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section class="widget widget-404-search">
+        <?php echo $this->layout()->content ;?>
+    </section>
+</div>
+</body>
+</html>

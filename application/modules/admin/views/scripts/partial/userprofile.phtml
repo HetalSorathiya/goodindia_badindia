@@ -1,0 +1,46 @@
+<?php $userData = $this->config->userProfileData[$this->config->usr_id]; ?>
+<aside class="profile-nav col-lg-3">
+	<section class="panel">
+		<div class="user-heading round">					
+			<?php if ($userData['usr_image'] != ""): ?>
+				<?php $src_path = $userData['usr_image']; ?>
+				<a href="#">
+					<img src="<?php echo $src_path; ?>" alt="">
+				</a>
+			<?php else: ?>
+				<a href="#">
+					<img src="<?php echo $this->config->PUBLIC_PATH . "admin/img/default-user.jpg"; ?>" alt="">
+				</a>
+			<?php endif; ?>
+			
+			<h1><?php echo $userData['usr_name']; ?></h1>
+			<form method="post" id="active">
+				<?php 
+					if($userData['usr_status'] == 1){	
+						$usr_status = 'InActive';
+					} else {
+						$usr_status = 'Active';
+					}
+				?>
+				
+				<a href="#" class="myLink usr_act_status" usr_status="<?php echo $usr_status; ?>" href_link="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "changestatus","usr_status" => $userData['usr_status'], "usr_id" => $userData['usr_id']), null, true); ?>">
+					
+					<?php if ($userData["usr_status"] == 1): ?>
+						<span class="label label-success label-mini">Active</span>
+					<?php else: ?>
+						<span class="label label-primary label-mini">InActive</span>
+					<?php endif; ?>
+					
+				</a>
+				
+			</form>
+			<p><?php echo $userData['lgn_email']; ?></p>
+			
+			
+		</div>
+		<ul class="nav nav-pills nav-stacked">
+			<li <?php if ($this->CONTROLLER_NAME == "user" && $this->ACTION_NAME == "profile"): ?> class="active" <?php endif; ?>><a href="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "profile", "usr_id" => $userData['usr_id']), null, TRUE); ?>"> <i class="fa fa-user"></i> Profile</a></li>
+			
+		</ul>
+	</section>
+</aside>

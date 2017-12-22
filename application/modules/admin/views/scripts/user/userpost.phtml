@@ -1,0 +1,188 @@
+<?php $this->headScript()->appendFile($this->ADMIN_PATH . "js/postlist.js"); ?>
+<div id="postlist-listing"></div>
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <?php echo $this->flashmessages(); ?>
+                <?php if (count($this->errorMessage) > 0): ?>
+                    <div class="col-lg-12">                  
+                        <div class="alert alert-block alert-danger fade in">
+                            <button type="button" class="close close-sm" data-dismiss="alert">
+                                <i class="fa fa-times"></i>
+                            </button>
+                            <?php foreach ($this->errorMessage as $erroValue): ?>
+                                <?php echo $erroValue; ?><br/>
+                            <?php endforeach; ?>
+                        </div>
+                    </div>
+                <?php endif; ?>
+                <form action="" method="post" id="postlistingform">
+                    <section class="panel">
+                        <header class="panel-heading">
+                            Post Listing
+
+                        
+                            <div class="form-group col-sm-12 padding_left_0 padding_top_20">
+
+                                <div class="col-sm-2 padding_left_0 padding_right_0">
+                                    <input type="text" class="form-control" name="searchtype" value="<?php echo $this->searchtype ?>" >
+                                </div>
+                                <div class="col-sm-2">
+                                    <input class="btn btn-success" id="button-submit" type="submit" value="Search" />
+                                    <a class="btn btn-success" href="<?php echo $this->url(array("module" => "admin", 'controller' => 'userpost', 'action' => 'unsetsession', 'pagename' => 'userpost'), null, TRUE); ?>">Clear</a>
+                                </div>
+                            </div>
+
+                        </header>
+
+                        <table class="table table-striped table-advance table-hover">
+                            <thead>
+                                <tr>
+									<th>
+                                        <input id="selectall" type="checkbox"/>&nbsp;&nbsp;
+                                        <i class="fa fa-picture-o"></i> Image
+                                    </th>
+                                    <th>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_title', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                        </a>
+                                        <i class="fa fa-tags"></i> Title
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_title', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                        </a>
+                                    </th>
+									<th>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'usr_name', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                        </a>
+                                        <i class="fa fa-user"></i> User
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'usr_name', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                        </a>
+                                    </th>
+									<th>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_location', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                        </a>
+                                        <i class="fa fa-map-marker"></i> Location
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_location', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                        </a>
+                                    </th>
+									
+                                    <th>
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_status', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                        </a>
+                                        <i class="fa fa-check-square-o"></i> Status
+                                        <a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'userpost', 'field' => 'post_status', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+                                            <img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                        </a>
+                                    </th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <?php if (count($this->postsData) > 0): ?>
+                                    <?php foreach ($this->postsData as $key => $value) : 
+										$image = '';
+                                        if ($value['post_image'] != '') {
+                                            $main_image = $this->ROOT_PATH . "post/" . $value['post_image'];
+                                            if (file_exists($main_image)) {
+                                                $image = $this->PUBLIC_PATH . "upload/post/" . $value['post_image'];
+                                            } else {
+                                                $image = $this->FRONT_IMAGE_PATH . "comingsoon.jpg";
+                                            }
+                                        } else {
+                                            $image = $this->FRONT_IMAGE_PATH . "comingsoon.jpg";
+                                        }
+									?>
+                                        <tr>
+											<td>
+                                                <input type="checkbox" class="content-checkbox chek_all" name="multicheck[]" value="<?php echo $value["post_id"]; ?>"/>&nbsp;
+                                                <img width="80" height="80" src="<?php echo $image; ?>" alt="">
+                                            </td>
+                                            <td>
+                                                <a href="<?php echo $this->url(array("module" => "admin", "controller" => "post", "action" => "form", "post_id" => $value["post_id"]), null, true); ?>" title="Edit" >
+													<?php echo $value["post_title"]; ?>
+												</a>
+                                            </td>
+											<td><?php echo $value['usr_name']; ?></td>
+											<td><?php echo $value['post_location']; ?></td>
+											
+											<td>
+												<?php 
+													if($value['post_status'] == 1){	
+														$post_status = 'InActive';
+													} else {
+														$post_status = 'Active';
+													}
+												?>
+                                               
+                                                    <?php if ($value["post_status"] == 1){ ?>
+                                                        <span class="label label-success label-mini">Active</span>
+                                                    <?php } else if($value["post_status"] == 0){ ?>
+                                                        <span class="label label-warning label-mini">InActive</span>
+                                                    <?php } ?>
+                                              
+                                            </td>
+                                            <td>
+                                               
+												<a title="View" class="btn btn-primary btn-xs" href="<?php echo $this->url(array("module" => "admin", "controller" => "post", "action" => "view", "post_id" => $value["post_id"]), null, true); ?>">
+                                                    <i class="fa fa-eye"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    <?php endforeach; ?>
+                                <?php else: ?>
+                                    <tr class="row2" >
+                                        <td>&nbsp;</td>
+                                        <td colspan="8"> No Record Found</td>
+                                    </tr>
+                                <?php endif; ?>
+                            </tbody>
+                        </table>
+
+                        <div class="panel-body">
+                            <div>
+                                <?php
+                                if (count($this->postsData) > 0):
+                                    echo $this->paginator->displayPages();
+                                endif;
+                                ?>
+                            </div>
+                        </div>				  
+                    </section>	
+                </form>
+            </div>
+        </div>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->
+
+<!-- Modal -->
+<div class="modal fade" id="update_status_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <br/>
+                <i class="icon-credit-card icon-7x"></i>
+                <input type="hidden" id="hidden_image_type" value=""/>
+                <input type="hidden" id="hidden_image_id" value=""/>
+                <h4 id="myModalLabel" class="semi-bold add_status"></h4>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="update_status_link btn btn-danger">submit</a>
+                <a href="#" data-dismiss="modal" class="btn btn-default">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

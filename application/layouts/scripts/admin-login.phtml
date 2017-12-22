@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="Gigable">
+        <meta name="keyword" content="Gigable Admin Portal">
+        <link rel="shortcut icon" href="<?php echo $this->ADMIN_PATH; ?>img/favicon.png">
+        <title><?php echo $this->SITE_NAME; ?></title>
+        <!-- Bootstrap core CSS -->
+        <link href="<?php echo $this->ADMIN_PATH; ?>css/bootstrap.min.css" rel="stylesheet">
+        <link href="<?php echo $this->ADMIN_PATH;?>css/bootstrap-reset.css" rel="stylesheet">
+
+        <!-- Custom styles for this template -->
+        <link href="<?php echo $this->ADMIN_PATH; ?>css/style.css" rel="stylesheet">
+        <link href="<?php echo $this->ADMIN_PATH; ?>css/style-responsive.css" rel="stylesheet" />
+        <link href="<?php echo $this->ADMIN_PATH; ?>css/developer.css" rel="stylesheet" />
+
+        <script>
+            var BASE_PATH = '<?php echo BASE_PATH; ?>';
+            var SITE_URL = '<?php echo $this->BASE_URL . ""; ?>';
+        </script>
+
+        <!-- HTML5 shim and Respond.js IE8 support of HTML5 tooltipss and media queries -->
+        <!--[if lt IE 9]>
+        <script src="js/html5shiv.js"></script>
+        <script src="js/respond.min.js"></script>
+        <![endif]-->
+    </head>
+
+    <body class="login-body">
+
+        <div class="container">
+
+            <div class="login-logo"><a href="<?php echo $this->url(array("module" => "admin", "controller" => "login", "action" => "index"), null, TRUE); ?>"><img src="<?php echo $this->ADMIN_PATH; ?>img/logo.png" alt=""></a></div>
+            <a href="<?php echo $this->url(array('module' => 'default', 'controller' => 'login', 'action' => 'index'), null, TRUE); ?>">&nbsp;
+            </a>
+            <?php echo $this->layout()->content ?>
+        </div>
+
+
+
+        <!-- js placed at the end of the document so the pages load faster -->
+        <script src="<?php echo $this->ADMIN_PATH; ?>js/jquery.js"></script>
+        <script src="<?php echo $this->ADMIN_PATH; ?>js/bootstrap.min.js"></script>
+        <script src="<?php echo $this->ADMIN_PATH; ?>js/project.js"></script>
+        <script src="<?php echo $this->ADMIN_PATH; ?>js/login.js"></script>
+    </body>
+</html>

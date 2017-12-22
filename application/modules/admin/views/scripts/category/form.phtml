@@ -1,0 +1,71 @@
+<?php $this->headScript()->appendFile($this->ADMIN_PATH . "js/category.js"); ?>
+<div id="category-listing"></div>
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper site-min-height">
+        <!-- page start-->
+        <section class="panel">
+            <!-- page start-->
+            <div class="row">
+                <div class="col-lg-12">
+                    <section class="panel">
+						<?php if ($this->successmessage != ""): ?>
+							<div class="alert alert-success">
+								<i class="icon-ok-sign"></i> 
+								<?php echo $this->successmessage; ?>
+							</div>
+						<?php endif; ?>
+						<?php if (count($this->errorMessageArray) > 0): ?>
+							<div class="col-lg-12">                  
+								<div class="alert alert-block alert-danger fade in">
+									<button type="button" class="close close-sm" data-dismiss="alert">
+										<i class="fa fa-times"></i>
+									</button>
+									<?php foreach ($this->errorMessageArray as $erroValue): ?>
+										<?php echo $erroValue; ?><br/>
+									<?php endforeach; ?>
+								</div>
+							</div>
+						<?php endif; ?>
+						<header class="panel-heading"><?php echo $this->mode; ?> Category
+							<a class="btn btn-success btn-sm pull-right" href="<?php echo $this->url(array("module" => "admin", "controller" => "category", "action" => "list"), null, TRUE); ?>">&nbsp;All Category</a>
+						</header>
+							<div class="panel-body">
+								<form role="form"  id="category-form" name="category-form"  enctype="multipart/form-data"  action="" method="post">
+								<div class="form-horizontal tasi-form" >
+									<div class="form-group">
+										<div class="col-sm-4">
+											<label><span class="error-star">*</span>Title</label>
+											<?php echo $this->form->cat_name; ?>
+										</div>
+										<!--<div class="col-sm-4">
+											<label><span class="error-star">*</span>Sort No.</label>
+											<?php //echo $this->form->cat_sort; ?>
+										</div>-->
+										<div class="col-sm-4">
+											<label><span class="error-star">*</span>Status</label>
+											<?php echo $this->form->cat_status; ?>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 col-sm-2 control-label"></label>
+										<div class="col-lg-12 center_button">
+											<button class="btn btn-success" type="submit">
+												<?php if($this->mode == 'Add'): ?>Save
+												<?php else: ?>Update<?php endif; ?>
+											</button>
+											 <a href="<?php echo $this->url(array("module" => "admin", "controller" => "category", "action" => "list"), null, TRUE); ?>" class="btn btn-danger cancelbutton">Cancel</a>
+										</div>
+									</div>
+								</div>
+							</section>
+						</form>
+					</div>
+				</div>
+				<!-- page end-->
+			</div>
+		</section>
+        <!-- page end-->
+    </section>
+</section>
+<!--main content end-->

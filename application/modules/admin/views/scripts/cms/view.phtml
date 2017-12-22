@@ -1,0 +1,47 @@
+<?php
+$cms_model = $this->cmsalldata;
+?>
+
+		<div id="pad-wrapper">
+    <div class="row pagelist-header">
+        <h3>Cms Detail</h3>
+    </div>
+    <div class="table-products">
+        <div class="row-fluid ">
+            <div class="pull-right">
+                <a class="btn-flat new-product" href="<?php echo $this->url(array("module" => "admin", "controller" => "cms", "action" => "list"), null, TRUE); ?>"> Back</a>
+            </div>              
+        </div><div class="main_detail">
+                        <div class="sub_main">
+                            <div class="detail_label">Title: </div>
+                            <div class="detail_data">
+                            <?php echo ucfirst($cms_model["c_title"]); ?></div>
+                        </div>
+		
+                        <div class="sub_main">
+                            <div class="detail_label">Description: </div>
+                            <div class="detail_data">
+                            <?php echo ucfirst($cms_model["c_description"]); ?></div>
+                        </div>
+		
+                        <div class="sub_main">
+                            <div class="detail_label">Created Date: </div>
+                            <div class="detail_data">
+                            <?php echo ucfirst($cms_model["c_createddate"]); ?></div>
+                        </div>
+		
+                        <div class="sub_main">
+                            <div class="detail_label">Updated Date: </div>
+                            <div class="detail_data">
+                            <?php echo ucfirst($cms_model["c_updateddate"]); ?></div>
+                        </div>
+		
+                        <div class="sub_main">
+                            <div class="detail_label">Status: </div>
+                            <div class="detail_data">
+                                <?php echo ( $cms_model["c_status"] == 1 ) ? "Active" : "Inactive"; ?>
+                            </div>
+                        </div>
+		 </div>
+         </div>
+    </div>

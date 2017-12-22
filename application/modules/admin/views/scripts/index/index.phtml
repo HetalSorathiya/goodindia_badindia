@@ -1,0 +1,100 @@
+<!--main content start-->
+<section id="main-content">
+    <section class="wrapper">
+        <!--state overview start-->
+        <div class="row state-overview">
+			<div class="col-lg-3 col-sm-6">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'post', 'action' => 'list'), null, TRUE); ?>">
+					<section class="panel">
+						<div class="symbol terques">
+							<i class="fa fa-tags"></i>
+						</div>
+						<div class="value">
+							<h1 class=" count2"><?php echo $this->postcountArray; ?></h1>
+							<p>Post</p>
+						</div>
+					</section>
+				</a>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+                <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'category', 'action' => 'list'), null, TRUE); ?>">
+                    <section class="panel">
+                        <div class="symbol red">
+                            <i class="fa fa-tags"></i>
+                        </div>
+                        <div class="value">
+                            <h1 class="count"><?php echo $this->categorycountArray; ?></h1>
+                            <p>Category</p>
+                        </div>
+                    </section>
+                </a>
+            </div>
+            <div class="col-lg-3 col-sm-6">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'adminuser', 'action' => 'list'), null, TRUE); ?>">
+					<section class="panel">
+						<div class="symbol terques">
+							<i class="fa fa-list-alt"></i>
+						</div>
+						<div class="value">
+							<h1 class=" count2"><?php echo $this->admincountArray; ?></h1>
+							<p>Admin</p>
+						</div>
+					</section>
+				</a>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+                <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'user', 'action' => 'list'), null, TRUE); ?>">
+                    <section class="panel">
+                        <div class="symbol yellow">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="value">
+                            <h1 class="count"><?php echo $this->usercountArray; ?></h1>
+                            <p>User</p>
+                        </div>
+                    </section>
+                </a>
+            </div>
+			<div class="col-lg-3 col-sm-6">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'metadata', 'action' => 'form'), null, TRUE); ?>">
+					<section class="panel">
+						<div class="symbol blue">
+							<i class="fa fa-gears"></i>
+						</div>
+						<div class="value">
+							<h1 class=" count2"></h1>
+							<p>Setting</p>
+						</div>
+					</section>
+				</a>
+			</div>
+			<div class="col-lg-3 col-sm-6">
+				<a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'logout', 'action' => 'index'), null, TRUE); ?>">
+					<section class="panel">
+						<div class="symbol red">
+							<i class="fa fa-key"></i>
+						</div>
+						<div class="value">
+							<h1 class=" count2"></h1>
+							<p>Logout</p>
+						</div>
+					</section>
+				</a>
+			</div>
+            <!--<div class="col-lg-3 col-sm-6">
+                <a href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'adminuser', 'action' => 'list'), null, TRUE); ?>">
+                    <section class="panel">
+                        <div class="symbol red">
+                            <i class="fa fa-user"></i>
+                        </div>
+                        <div class="value">
+                            <h1 class="count"><?php echo $this->admincountArray; ?></h1>
+                            <p>Admin</p>
+                        </div>
+                    </section>
+                </a>
+            </div>-->
+		</div>       
+	</section>
+</section>
+<!--main content end-->

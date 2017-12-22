@@ -1,0 +1,189 @@
+<?php $this->headScript()->appendFile($this->ADMIN_PATH . "js/user.js"); ?><div id="user-listing"></div>
+<section id="main-content">
+    <section class="wrapper">
+        <!-- page start-->
+        <div class="row">
+            <div class="col-lg-12">
+                <?php echo $this->flashmessages(); ?>
+					<?php if (count($this->errorMessage) > 0): ?>
+						<div class="col-lg-12">                  
+							<div class="alert alert-block alert-danger fade in">
+								<button type="button" class="close close-sm" data-dismiss="alert">
+									<i class="fa fa-times"></i>
+								</button>
+								<?php foreach ($this->errorMessage as $erroValue): ?>
+									<?php echo $erroValue; ?><br/>
+								<?php endforeach; ?>
+							</div>
+						</div>
+					<?php endif; ?>
+					<form action="" method="post" id="propertylocationlistingform">
+						<section class="panel">
+							<header class="panel-heading">
+							User List
+								<?php if (count($this->usersData) > 0): ?> 
+									<div class="delete_All pull-right">    
+										&nbsp;&nbsp;<input type="submit" accesskey="s" value="Delete All" name="multiaction"  id="multiaction" class="btn btn-sm btn-danger delete_all"/>      
+									</div>
+								<?php else: ?>
+										&nbsp;
+								<?php endif; ?>
+
+								<div class="form-group col-sm-12 padding_left_0 padding_top_20">
+									<div class="col-sm-2 padding_left_0 padding_right_0">
+										<input type="text" class="form-control" name="searchtype" value="<?php echo $this->searchtype ?>" >
+									</div>
+									
+									
+								
+									<div class="col-sm-2">
+										<input class="btn btn-success" id="button-submit" type="submit" value="Search" />
+										<a class="btn btn-success" href="<?php echo $this->url(array("module" => "admin", 'controller' => 'user', 'action' => 'unsetsession', 'pagename' => 'list'), null, TRUE); ?>">Clear</a>
+									</div>
+								</div>
+							</header>
+
+							<table class="table table-striped table-advance table-hover">
+								<thead>
+									<tr>
+									
+										<th>
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'usr_name', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+											</a>
+											<i class="fa fa-dot-circle-o"></i> Name
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'usr_name', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+											</a>
+										</th>
+									
+									
+										<th>
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'lgn_email', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+											</a>
+											<i class="fa fa-dot-circle-o"></i> Email
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'lgn_email', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+											</a>
+										</th>
+									   
+										 <th>
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'usr_status', 'sort' => 'asc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+											</a>
+											<i class="fa fa-check-square-o"></i> Status
+											<a href="<?php echo $this->url(array('controller' => 'user', 'action' => 'list', 'field' => 'usr_status', 'sort' => 'desc', 'module' => 'admin'), 'default', false); ?>">
+												<img src="<?php echo $this->ADMIN_PATH; ?>img/datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+											</a>
+									   
+										</th>
+										
+										<th>Action</th>
+									
+									</tr>
+								</thead >
+								  
+								<tbody>
+									<?php  if (count($this->usersData) > 0): ?>
+										<?php
+										foreach ($this->usersData as $key => $value) :
+										  
+											?>
+											<tr>
+												
+												<td> <input type="checkbox" class="content-checkbox chek_all" name="multicheck[]" value="<?php echo $value["usr_id"]; ?>"/>&nbsp;
+												<?php echo $value['usr_name']; ?> <?php echo $value['usr_lname'];?></td>
+												
+												<td><?php echo $value['lgn_email']; ?></td>
+												
+												<td>
+												   <?php 
+													if($value['usr_status'] == 1){	
+														$usr_status = 'InActive';
+													} else {
+														$usr_status = 'Active';
+													}
+												?>
+												
+												<a href="#" class="myLink" usr_status="<?php echo $usr_status; ?>" href_link="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "changestatus","usr_status" => $value['usr_status'], "usr_id" => $value['usr_id'],"type" => "list"), null, true); ?>">
+													<?php if ($value["usr_status"] == 1): ?>
+														<span class="label label-success label-mini">Active</span>
+													<?php else: ?>
+														<span class="label label-warning label-mini">InActive</span>
+													<?php endif; ?>
+												</a>
+												
+												<?php if($value['usr_blackpool'] == 1): ?> 
+													<span class="btn btn-warning btn-xs">Blackpool</span>
+												<?php endif; ?>
+												
+												</td>
+												
+												<td>
+													<a href="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "profile", "usr_id" => $value["usr_id"]), null, true); ?>" title="View" class="btn btn-primary btn-xs">
+														<i class="fa fa-eye"></i>
+													</a>
+												
+												
+													<a href="#" title="Delete" class="btn btn-danger btn-xs deletemodal" target_href="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "delete", "usr_id" => $value["usr_id"]), null, true); ?>">
+														<i class="fa fa-trash-o"></i>
+													</a>
+												
+													<div class="pull-right">    
+														<a href="<?php echo $this->url(array("module" => "admin", "controller" => "user", "action" => "userpost", "usr_id" => $value['usr_id']), null, true); ?>" class="btn btn-sm btn-danger">View Post</a> 
+													</div>
+										
+												</td>
+												
+												
+											</tr>
+										<?php endforeach; ?>
+									<?php else: ?>
+										<tr class="row2" >
+											<td>&nbsp;</td>
+											<td colspan="8"> No Record Found</td>
+										</tr>
+									<?php endif; ?>
+								</tbody>
+							</table>
+				  
+								  
+							<div class="panel-body">
+								<div>
+								<?php if (count($this->usersData) > 0):
+									echo $this->paginator->displayPages();
+								endif;
+								?>
+								</div>
+							</div>				  
+						</section>	
+					</form>
+				</div>
+			</div>
+        <!-- page end-->
+    </section>
+</section>
+
+<!-- Modal -->
+<div class="modal fade" id="update_status_Modal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+                <br/>
+                <i class="icon-credit-card icon-7x"></i>
+                <input type="hidden" id="hidden_image_type" value=""/>
+                <input type="hidden" id="hidden_image_id" value=""/>
+                <h4 id="myModalLabel" class="semi-bold add_status"></h4>
+                <br/>
+            </div>
+            <div class="modal-footer">
+                <a href="#" class="update_status_link btn btn-danger">submit</a>
+                <a href="#" data-dismiss="modal" class="btn btn-default">Cancel</a>
+            </div>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>

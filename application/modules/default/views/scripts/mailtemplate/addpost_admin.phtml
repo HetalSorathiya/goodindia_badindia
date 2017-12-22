@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Good India Bad India</title>
+		<style>
+			h2 {
+				color:#BF1E2E;
+				font-size: 20px;
+				text-align: center;
+			}
+			table {
+				border-collapse: collapse;
+				width: 50%;
+				text-align: center;
+				margin:13px 110px 20px 110px;       
+			}
+			th, td {
+				text-align: left;
+				padding: 8px;
+				width: 50%;
+				font-size: 15px;
+			}
+			tr:nth-child(odd){background-color: #f2f2f2}
+
+			th {
+				background-color: #4CAF50;
+				color: white;
+			}			
+			p {
+				margin:0px; 
+				text-align:center; 
+				font-size:15px;
+			}
+			.message {
+				margin:10px; 
+				text-align:left; 
+				font-size:15px;
+				padding-left:100px;
+			}
+		</style>
+	</head>
+	
+	<body style="margin:30px auto; width:700px;">
+		<div style="background:black; padding:20px; text-align:center;">
+			<a href="<?php echo $this->sitelink; ?>"><img src="<?php echo $this->logolink; ?>/mail_logo.png" alt="logo"/></a>
+		</div>
+		<div style="align:center; border:1px solid #ccc; padding-top:30px; padding-bottom:40px">
+			<h2>Added New Post</h2>
+			<table>			  
+				
+				<tr>
+					<td></td>
+					<td><a href="<?php echo $this->viewpost_link;?>">View Post</td>				
+				</tr>
+				<tr>
+					<td></td>
+					<td><a href="<?php echo $this->activation_link;?>">Activate Post</a></td>	
+				</tr>
+			</table>
+		</div>
+		<div style="background:#333333; color:#ffffff; padding:10px;text-align:center;">
+            <p><?php echo $this->ADMIN_COPYRIGHT; ?></p>
+            <!--<p>Tel: <?php //echo $this->ADMIN_CONTACT_TELEPHONE; ?> | Email: <?php //echo $this->ADMIN_CONTACT_EMAIL; ?> </p>-->
+			
+		</div>
+	</body>
+</html>

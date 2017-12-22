@@ -1,0 +1,32 @@
+.field-box.error label,
+.field-box.error .alert-msg {
+  color: #c73939;
+}
+.field-box.error input {
+  border-color: #c73939;
+}
+
+.field-box.success label,
+.field-box.success .alert-msg {
+  color: #379e48;
+}
+
+ .alert-msg {
+  display: block;
+  
+  position: relative;
+  top: -2px;
+  margin-bottom: -4px;
+}
+ .alert-msg i {
+  font-size: 14px;
+}
+
+
+.field-box.success input {
+  border-color: #379e48;
+}
+
+.display-none {
+	display:none;
+}

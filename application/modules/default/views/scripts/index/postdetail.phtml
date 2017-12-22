@@ -1,0 +1,269 @@
+  <div class="container-area white-bg">
+    <div class="container">
+        <div class="row">
+			<?php 
+			$gtlCommon = new GTL_Common();
+			foreach($this->PostDetailArray as $key => $postdetail){
+				$category = $postdetail['cat_name'];;
+			 ?>
+				<div class="col-md-12 col-sm-12">
+					<h2 class="page-title"><?php echo $postdetail['post_title']; ?></h2>
+				</div>
+	 
+				<div class="post-details-container clearfix">
+				
+					<div class="col-md-9 col-sm-12">
+									
+						<div class="view-popup-left-div clearfix">
+							<div class="common-strip">
+								<div class="cate-div">
+									<span><?php echo $postdetail['cat_name']; ?></span>
+								</div>
+								<div class="like-dislike-div">
+									<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="good-icon like_comt"></i><?php echo $postdetail['post_good']; ?></a></span>
+										<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="bad-icon like_comt"></i> <?php echo $postdetail['post_bad']; ?></a></span>
+										<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="comments-icon like_comt"></i> <?php echo $postdetail['post_comment']; ?></a></span>
+								</div>
+								
+								<div class="share-div pull-right">
+									<span>
+										<div class="dropdown">
+											<a href="#" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true"><i class="fa fa-share-alt" ></i> Share</a>
+										  <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+											<li class="report-link"><a href="#"><i class="fa fa-share"></i> Report Good India Bad India</a></li>
+											<li class="fb-link"><a href="#"><i class="fa fa-facebook"></i> Share on Facebook</a></li>
+											<li class="twitter-link"><a href="#"><i class="fa fa-twitter"></i> Share on Twitter</a></li>
+										  </ul>
+										</div>
+									</span>
+								</div>
+							</div><!-- end of common-strip -->
+							
+							<div class="pic-div">
+							<?php if($postdetail['post_video']!=''){ ?>
+								<br><br>
+								<video class="video_screen" controls preload="auto" poster="<?php echo $postdetail['post_image']; ?>" >
+									<source src="<?php echo $postdetail['post_video']; ?>" type='video/mp4'>
+								</video>							
+							<?php } else { ?>
+							
+								<img src="<?php echo $postdetail['post_image']; ?>" alt="" class="img-responsive">
+							<?php } ?>
+							</div><!-- end of pic div -->
+							
+							<div class="desc-bottom">
+								<p><?php echo $postdetail['post_desc']; ?></p>
+							</div><!-- end of desc-bottom -->                
+						</div><!-- end of view-popup-left-div -->
+						
+					</div><!-- end of col -->
+		
+					<div class="col-md-3 col-sm-12">
+						
+						<div class="view-popup-right-div clearfix">
+						
+							<div class="popup-profile-div">
+								<span class="thumb"><img src="<?php echo $postdetail['usr_image']; ?>" alt=""></span>
+								<?php $dateofposting =  $gtlCommon->time_elapsed_string($postdetail['post_createddate']);	 ?>
+								<span class="profile-txt"><?php echo $postdetail['usr_name']; ?><br><small><?php echo $dateofposting;?></small></span> 
+							</div><!-- end of profile div -->
+							
+						</div><!-- end of view-popup-right-div -->
+						  
+						<div class="view-popup-right-div nomargin clearfix">
+						  
+							<div class="comment-container">
+								<h4 class="title">Comments (<?php echo $postdetail['post_comment']; ?>)</h4>
+								
+								<div class="comment-lists-div clearfix">
+								<?php  foreach($this->finalArra as $value) {
+								?>
+									<div class="comment-lists-box clearfix">
+										<div class="pic"><img src="<?php echo $value['usr_image']; ?>" alt=""></div>
+										<div class="comment-txt">
+											<div class="comment-title"><?php echo $value['usr_name']; ?></div>
+											<div class="comment-txt"><?php echo $value['cmt_msg']; ?></div>
+											<?php $dateofpost =  $gtlCommon->time_elapsed_string($value['cmt_createddate']);	 ?>
+											<div class="comment-time"><?php echo $dateofpost; ?></div>
+										</div> 
+									</div><!-- end of comment-lists-box -->
+									
+									<?php foreach($this->commentreplyArray as $cmt){ 
+										foreach ($cmt as $rep){ 
+										if($rep['cmt_ref'] == $value['cmt_id']){
+										?>
+										<div class="comment-lists-box reply-comment-box clearfix">
+										<div class="pic"><img src="<?php echo $rep['usr_image']; ?>" alt=""></div>
+										<div class="comment-txt">
+											<div class="comment-title"><?php echo $rep['usr_name']; ?></div>
+											<div class="comment-txt"><?php echo $rep['cmt_msg']; ?></div>
+											<?php $replyeofpost =  $gtlCommon->time_elapsed_string($rep['cmt_createddate']);	 ?>
+											<div class="comment-time"><?php echo $replyeofpost; ?></div>
+										</div> 
+									</div>
+										
+									
+									
+										<?php }}
+									
+									} ?>
+								<?php } ?>
+
+									
+									
+								</div><!-- end of comment-lists-div -->
+								
+								<div class="comment-input-div clearfix">
+								
+								<form>
+									<span><button class="btn-submit" name="submit" data-toggle="modal" data-target="#appmodal"><i class="fa fa-chevron-right"></i></button></span>
+									<input name="inputcomment" type="text" class="input-comment" placeholder="Enter your comments"  data-toggle="modal" data-target="#appmodal">
+								</form>
+								
+								</div><!-- end of comment-input-div -->
+								
+							</div><!-- end of profile div -->
+						   
+						</div><!-- end of view-popup-right-div -->
+						
+						
+					</div><!-- end of col -->
+				
+				</div><!-- end of post-details-container -->
+			<?php }  ?>    
+        </div><!-- end of row -->
+    </div><!-- end of container -->
+        <?php
+		
+		//echo '<pre>';print_r($this->PostArray);exit;?>
+		
+		 <div class="things-do-container clearfix">
+            <h2>Similar Things to Do in the City </h2>
+            <h3>Explore some of GOOD/BAD things from around the your area. </h3>
+            
+            
+            <div class="container">
+            <div class="row">
+            <?php foreach($this->PostArray as $value) {
+				/* echo "<pre>";print_r($value);exit;
+				if($value['post_cat'] == $category){ */
+				
+				?>
+			<div class="col-md-4 col-sm-4">
+				
+				 <div class="things-do-div clearfix">
+            
+					<div class="things-do-box clearfix">
+                        
+                        	<div class="top-div">
+							<?php if($value['usr_image'] != ""){
+											$usr_image = $value['usr_image'];
+										}else{
+											$usr_image = $this->BASE_URL.'public/admin/img/user-thumb.jpg';
+										}?>
+                            	<div class="user-thumb"><img src="<?php echo $usr_image;?>" alt="" class="img-responsive"></div>
+                                <div class="top-txt">
+                                	<div class="user-txt"><?php echo $value['usr_name']; ?></div>
+									<?php $gtlCommon = new GTL_Common();
+													$dateofpost =  $gtlCommon->time_elapsed_string($value['post_createddate'])	 ?>
+                                    <div class="time-txt"><?php echo $dateofpost;?> <span>.</span><?php echo $value['cat_name']; ?></div>
+                                    <div class="location-txt"><?php echo $value['post_location']; ?></div>
+                                </div>
+                            </div>
+							<?php if($value['post_type'] == "Good"){
+											$cls = "good-badage";
+										}else{
+											$cls = "bad-badage";											
+										}
+										
+										
+										?>
+										
+                        	<div class="thumb"><span class="<?php echo $cls;?>"><?php echo $value['post_type']; ?></span><a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>" rel="popupoutbox" class="popup"><img src="<?php echo $value['post_image']; ?>" alt="" class="thumb-img img-responsive"></a></div>
+                            <div class="txt-div">
+                            	<a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>"><h4><?php echo $value['post_title']; ?></h4></a>
+                             </div>
+                             <div class="btm-strip">
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="good-icon like_comt"></i> <?php echo $value['post_good']; ?></a></span>
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="bad-icon like_comt"></i> <?php echo $value['post_bad']; ?></a></span>
+											<span><a href="#appmodal" data-toggle="modal" data-target="#appmodal"><i class="comments-icon like_comt"></i><?php echo $value['post_comment']; ?></a></span>
+											<span><a href="<?php echo $this->BASE_URL . "index/postdetail/post_id/" . $value['post_id'].  "/post_cat/" . $value['post_cat_id']; ?>"><i class="share-icon"></i> (10)</a></span>
+										 </div>
+                        
+                        </div><!-- end of box -->
+					</div><!-- end of things-do-div -->
+				
+			</div><!-- end of col -->
+			
+			<?php 
+				//}
+			}?>
+			
+					</div><!-- end of things-do-div -->
+			<!-- </div>end of col -->
+			
+           
+			
+			</div><!-- end of row -->
+			</div><!-- end of container -->
+			
+		</div>
+			
+     
+     
+     <div id="download" class="download-div">
+
+    <!--container-->
+        <div class="container">
+            <div class="row">
+    
+                <!-- Start title-section -->
+                        <div class="download-content">
+                            <h2>Get it for free</h2>
+                            <div class="btn-download-content">
+                                <a href="#" class="btn-downlaod"><img src="<?php echo $this->BASE_URL .'public/img/play-app.png';?>" alt="" title=""> </a>
+                            </div>
+    
+    
+                            <img src="<?php echo $this->BASE_URL .'public/img/device3.png';?>" alt="" title="" class="img-responsive">
+                        </div>
+            </div>
+        </div>
+    </div><!-- end of download div -->
+     
+     
+   </div><!-- end of container - area -->
+   
+   	<!-- Modal -->
+<div class="modal fade" id="appmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        
+      </div>
+      <div class="modal-body">
+        
+        <div class="app-modal-div clearfix">
+        	
+            <div class="download-content">
+            <h2>Get it for free</h2>
+            
+            <h3>Download App for any comments, like and dslike</h3>
+            <h4></h4>
+            <div class="btn-download-content">
+                <a href="#"><img src="<?php echo $this->BASE_URL .'public/img/play-app.png';?>" width="200px" class="img-responsive" alt="" title=""> </a>
+            </div>
+
+			
+            <img src="<?php echo $this->BASE_URL .'public/img/device3.png';?>" alt="" title="" class="img-responsive">
+        </div>
+        
+        </div><!-- end of app-modal-div  -->
+        
+      </div>
+      
+    </div>
+  </div>
+</div>
+<!-- Modal end -->

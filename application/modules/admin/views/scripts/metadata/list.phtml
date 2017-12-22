@@ -1,0 +1,181 @@
+<div id="metadata-listing"></div>
+<?php echo $this->flashmessages(); ?>
+<?php if (count($this->errorMessage) > 0): ?>
+    <div class="alert alert-error">
+        <?php foreach ($this->errorMessage as $erroValue): ?>
+			<div class="text-left">
+				<i class="icon-remove-sign"></i>
+				<?php echo $erroValue; ?>
+			</div>
+		<?php endforeach; ?>
+    </div>
+<?php endif; ?>
+
+<div id="pad-wrapper">
+     <div class="row pagelist-header">
+        <h3>Metadata Listing</h3>
+    </div>
+    <div class="table-products">
+        <form action="" method="post" id="metadatalistingform">
+			<div class="row-fluid ">
+				<div class="pull-right">
+					<input type="text" class="search" name="searchtype" value="<?php echo $this->searchtype?>" >
+					<input type="submit" value="Search Field" name="searchbutton"  id="searchbutton" class="btn-flat new-product"/>
+					<a class="btn-flat new-product" href="<?php echo $this->url(array('module' => 'admin', 'controller' => 'metadata', 'action' => 'form'), null, TRUE); ?>">+ Add Metadata</a>
+				</div>
+            </div>
+            <div class="row">
+                <?php if (count($this->metaData) > 0): ?> 
+                <div class="delete_All">    
+                    <input type="submit" accesskey="s" value="Delete all" name="multiaction"  id="multiaction" class="btn-flat danger"/>      
+                    <?php else: ?>
+                        &nbsp;
+                <?php endif; ?>
+                </div>
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th class="col-md-3 ">
+								<input id="selectall" type="checkbox" />
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_page_name', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Page Name
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_page_name', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_charset', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Charset
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_charset', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+							
+							<th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_description', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Description
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_description', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+							
+							<th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_keyword', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Keyword
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_keyword', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+							
+							<th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_author', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Author
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_author', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+							
+							<th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_title', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+								Title
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_title', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                            </th>
+
+                            <th class="col-md-3">
+                                <span class="line"></span>
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_status', 'sort' => 'asc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_asc.png"  alt="Ascending" title="Ascending" class="sort_asc" />
+                                </a>
+                                Status
+                                <a href="<?php echo $this->url(array('controller' => 'metadata', 'action' => 'list', 'field' => 'meta_status', 'sort' => 'desc','module' => 'admin'), 'default', false); ?>">
+                                    <img src="<?php echo $this->IMAGE_PATH; ?>datatables/sort_desc.png"  alt="Descending" title="Descending" class="sort_desc"  />
+                                </a>
+                                
+                                <span class="cls_action">Action</span>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+						
+                        <?php if (count($this->metaData) > 0): ?>
+                            <?php $counter = 0; ?>
+                            <?php foreach ($this->metaData as $key => $value) : ?>
+                                <!-- row -->
+                                <tr>
+									<td>
+										<input type="checkbox" class="content-checkbox chek_all" name="multicheck[]" value="<?php echo $value["meta_id"]; ?>"/>
+										<?php echo $value['meta_page_name']; ?>
+                                    </td>
+                                    <td class="">
+										<?php echo $value['meta_charset']; ?>
+                                    </td>
+									<td class="">
+										<?php echo $this->gtlObj->getCollapseText($value['meta_description'],100); ?>
+									</td>
+									<td class="">
+										<?php echo $value['meta_keyword']; ?>
+                                    </td>
+									<td class="">
+										<?php echo $value['meta_author']; ?>
+                                    </td>
+									<td class="">
+										<?php echo $value['meta_title']; ?>
+                                    </td>
+									
+                                    <td>
+                                        <?php if ($value['meta_status'] == 1): ?>
+                                            <span class="label label-success">Active</span>
+                                        <?php else: ?>
+                                            <span class="label label-info">InActive</span>
+                                        <?php endif; ?>
+										<ul class="actions">
+                                            <li>
+                                                <a title="Edit" href="<?php echo $this->url(array('module' => 'admin','controller' => 'metadata', 'action' => 'form', 'meta_id' => $value["meta_id"]), null, true); ?>">
+                                                    <i class="table-edit"></i>
+                                                </a>
+                                            </li>
+                                            <li class="last">
+                                                <a title="Delete" href="<?php echo $this->url(array('module' => 'admin','controller' => 'metadata', 'action' => 'delete', 'meta_id' => $value["meta_id"]), null, true); ?>">
+                                                    <i class="table-delete"></i>
+                                                </a>
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                                <?php $counter++; ?>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <tr class="row2" >
+                                <td>&nbsp;</td>
+                                <td colspan="8"> No Record Found</td>
+                            </tr>
+                        <?php endif; ?>
+                    </tbody>
+                </table>
+            </div>
+            <?php if (count($this->metaData) > 0): 
+				echo $this->paginator->displayPages();
+            endif; ?>
+        </form>
+    </div>
+</div>
